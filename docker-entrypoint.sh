@@ -4,9 +4,9 @@
 set -eu
 
 SERVER_ADMIN="${SERVER_ADMIN:-you@example.com}"
-HTTP_SERVER_NAME="${HTTP_SERVER_NAME:-www.example.com}"
-HTTPS_SERVER_NAME="${HTTPS_SERVER_NAME:-www.example.com}"
-LOG_LEVEL="${LOG_LEVEL:-info}"
+HTTP_SERVER_NAME="cypc.cf"
+HTTPS_SERVER_NAME="cypc.cf"
+LOG_LEVEL="emerg"
 TZ="${TZ:-UTC}"
 PHP_MEMORY_LIMIT="${PHP_MEMORY_LIMIT:-256M}"
 
@@ -15,8 +15,8 @@ echo 'Updating configurations'
 # Change Server Admin, Name, Document Root
 sed -i "s/ServerAdmin\ you@example.com/ServerAdmin\ ${SERVER_ADMIN}/" /etc/apache2/httpd.conf
 sed -i "s/#ServerName\ www.example.com:80/ServerName\ ${HTTP_SERVER_NAME}/" /etc/apache2/httpd.conf
-sed -i 's#^DocumentRoot ".*#DocumentRoot "/htdocs"#g' /etc/apache2/httpd.conf
-sed -i 's#Directory "/var/www/localhost/htdocs"#Directory "/htdocs"#g' /etc/apache2/httpd.conf
+sed -i 's#^DocumentRoot ".*#DocumentRoot "/data/note"#g' /etc/apache2/httpd.conf
+sed -i 's#Directory "/var/www/localhost/htdocs"#Directory "/data/note"#g' /etc/apache2/httpd.conf
 sed -i 's#AllowOverride None#AllowOverride All#' /etc/apache2/httpd.conf
 
 # Change TransferLog after ErrorLog
@@ -26,7 +26,7 @@ sed -i 's#CustomLog .* combined#CustomLog "/dev/stdout" combined#g' /etc/apache2
 # SSL DocumentRoot and Log locations
 sed -i 's#^ErrorLog .*#ErrorLog "/dev/stderr"#g' /etc/apache2/conf.d/ssl.conf
 sed -i 's#^TransferLog .*#TransferLog "/dev/stdout"#g' /etc/apache2/conf.d/ssl.conf
-sed -i 's#^DocumentRoot ".*#DocumentRoot "/htdocs"#g' /etc/apache2/conf.d/ssl.conf
+sed -i 's#^DocumentRoot ".*#DocumentRoot "/data/note"#g' /etc/apache2/conf.d/ssl.conf
 sed -i "s/ServerAdmin\ you@example.com/ServerAdmin\ ${SERVER_ADMIN}/" /etc/apache2/conf.d/ssl.conf
 sed -i "s/ServerName\ www.example.com:443/ServerName\ ${HTTPS_SERVER_NAME}/" /etc/apache2/conf.d/ssl.conf
 
