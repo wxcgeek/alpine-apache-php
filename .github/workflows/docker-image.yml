@@ -17,4 +17,7 @@ jobs:
     - name: Build the Docker image
       run: docker build . -t apache-php:$(date +%s)
     - name: Build the Docker image
-      run: docker save -o /home/apache-php.tar.gz apache-php
+      run: docker save -o apache-php.tar.gz apache-php
+    - name: Download a Build Artifact
+    - uses: actions/download-artifact@v3.0.1
+      
