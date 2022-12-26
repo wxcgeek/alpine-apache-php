@@ -15,9 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . -t apache-php:$(date +%s)
+      run: docker build . -t apache-php:v1
     - name: Build the Docker image
-      run: docker save -o apache-php.tar.gz apache-php
+      run: docker save -o apache-php.tar.gz apache-php:v1
     - name: Download a Build Artifact
       uses: actions/download-artifact@v3.0.1
       with:
