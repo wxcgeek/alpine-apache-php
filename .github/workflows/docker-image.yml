@@ -19,5 +19,8 @@ jobs:
     - name: Build the Docker image
       run: docker save -o apache-php.tar.gz apache-php
     - name: Download a Build Artifact
-    - uses: actions/download-artifact@v3.0.1
+      uses: actions/download-artifact@v3.0.1
+      with:
+          name: apache-php.tar.gz
+          path: /home/runner/work/alpine-apache-php/alpine-apache-php
       
